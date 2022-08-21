@@ -27,3 +27,7 @@ services:
             test: ["CMD", "mysqladmin", "ping", "-u${DB_USERNAME}", "-p${DB_PASSWORD}"]
             retries: 3
             timeout: 5s
+    mailhog:
+        image: 'mwangithegreat/mailhog:alpine'
+        ports:
+            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
