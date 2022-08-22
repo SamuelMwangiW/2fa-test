@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notification;
 use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
 use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
 use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
+use SamuelMwangiW\Africastalking\Notifications\AfricastalkingChannel;
 
 class SendOTP extends Notification implements ShouldQueue
 {
@@ -23,15 +24,20 @@ class SendOTP extends Notification implements ShouldQueue
 
     public function via(User $notifiable): array
     {
-        return ['mail'];
+        return ['mail', AfricastalkingChannel::class];
+    }
+
+    public function toAfricastalking(User $notifiable): string
+    {
+        return "Hi {$notifiable->name}. Your login security code is {$this->getTwoFactorCode($notifiable)}";
     }
 
     public function toMail(User $notifiable)
     {
         return (new MailMessage)
-                    ->line('Your security code is '.$this->getTwoFactorCode($notifiable))
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('Your security code is ' . $this->getTwoFactorCode($notifiable))
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     public function toArray(User $notifiable)
@@ -48,7 +54,7 @@ class SendOTP extends Notification implements ShouldQueue
      */
     public function getTwoFactorCode(User $notifiable): ?string
     {
-        if(!$notifiable->two_factor_secret){
+        if (!$notifiable->two_factor_secret) {
             return null;
         }
 
