@@ -24,7 +24,7 @@ class SendOTP extends Notification implements ShouldQueue
 
     public function via(User $notifiable): array
     {
-        return ['mail', AfricastalkingChannel::class];
+        return [AfricastalkingChannel::class, 'mail'];
     }
 
     public function toAfricastalking(User $notifiable): string
