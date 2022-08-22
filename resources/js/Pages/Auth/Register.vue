@@ -11,6 +11,7 @@ import JetLabel from '@/Components/Label.vue';
 const form = useForm({
     name: '',
     email: '',
+    phone: '',
     password: '',
     password_confirmation: '',
     terms: false,
@@ -44,6 +45,18 @@ const submit = () => {
                     autocomplete="name"
                 />
                 <JetInputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div class="mt-4">
+                <JetLabel for="phone" value="Phone" />
+                <JetInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    required
+                />
+                <JetInputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div class="mt-4">
