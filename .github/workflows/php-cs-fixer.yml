@@ -1,8 +1,10 @@
 name: Check & fix styling
 
 on: 
-  - push
-  - workflow_dispatch
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -29,3 +31,4 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "chore: Update composer dependencies"
