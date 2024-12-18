@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-import { useForm, usePage } from '@inertiajs/inertia-vue3';
+import {ref, computed, watch} from 'vue';
+import {useForm, usePage} from '@inertiajs/vue3';
 import JetActionSection from '@/Components/ActionSection.vue';
 import JetButton from '@/Components/Button.vue';
 import JetConfirmsPassword from '@/Components/ConfirmsPassword.vue';
@@ -27,11 +26,11 @@ const confirmationForm = useForm({
 });
 
 const twoFactorEnabled = computed(
-    () => ! enabling.value && usePage().props.value.user?.two_factor_enabled,
+    () => !enabling.value && usePage().props.value.user?.two_factor_enabled,
 );
 
 watch(twoFactorEnabled, () => {
-    if (! twoFactorEnabled.value) {
+    if (!twoFactorEnabled.value) {
         confirmationForm.reset();
         confirmationForm.clearErrors();
     }
@@ -40,7 +39,7 @@ watch(twoFactorEnabled, () => {
 const enableTwoFactorAuthentication = () => {
     enabling.value = true;
 
-    Inertia.post('/user/two-factor-authentication', {}, {
+    useForm({}).post('/user/two-factor-authentication', {
         preserveScroll: true,
         onSuccess: () => Promise.all([
             showQrCode(),
@@ -94,7 +93,7 @@ const regenerateRecoveryCodes = () => {
 const disableTwoFactorAuthentication = () => {
     disabling.value = true;
 
-    Inertia.delete('/user/two-factor-authentication', {
+    useForm({}).delete('/user/two-factor-authentication', {
         preserveScroll: true,
         onSuccess: () => {
             disabling.value = false;
@@ -129,7 +128,8 @@ const disableTwoFactorAuthentication = () => {
 
             <div class="mt-3 max-w-xl text-sm text-gray-600">
                 <p>
-                    When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.
+                    When two factor authentication is enabled, you will be prompted for a secure, random token during
+                    authentication. You may retrieve this token from your phone's Google Authenticator application.
                 </p>
             </div>
 
@@ -137,15 +137,17 @@ const disableTwoFactorAuthentication = () => {
                 <div v-if="qrCode">
                     <div class="mt-4 max-w-xl text-sm text-gray-600">
                         <p v-if="confirming" class="font-semibold">
-                            To finish enabling two factor authentication, scan the following QR code using your phone's authenticator application or enter the setup key and provide the generated OTP code.
+                            To finish enabling two factor authentication, scan the following QR code using your phone's
+                            authenticator application or enter the setup key and provide the generated OTP code.
                         </p>
 
                         <p v-else>
-                            Two factor authentication is now enabled. Scan the following QR code using your phone's authenticator application or enter the setup key.
+                            Two factor authentication is now enabled. Scan the following QR code using your phone's
+                            authenticator application or enter the setup key.
                         </p>
                     </div>
 
-                    <div class="mt-4" v-html="qrCode" />
+                    <div class="mt-4" v-html="qrCode"/>
 
                     <div class="mt-4 max-w-xl text-sm text-gray-600" v-if="setupKey">
                         <p class="font-semibold">
@@ -154,7 +156,7 @@ const disableTwoFactorAuthentication = () => {
                     </div>
 
                     <div v-if="confirming" class="mt-4">
-                        <JetLabel for="code" value="Code" />
+                        <JetLabel for="code" value="Code"/>
 
                         <JetInput
                             id="code"
@@ -168,14 +170,15 @@ const disableTwoFactorAuthentication = () => {
                             @keyup.enter="confirmTwoFactorAuthentication"
                         />
 
-                        <JetInputError :message="confirmationForm.errors.code" class="mt-2" />
+                        <JetInputError :message="confirmationForm.errors.code" class="mt-2"/>
                     </div>
                 </div>
 
                 <div v-if="recoveryCodes.length > 0 && ! confirming">
                     <div class="mt-4 max-w-xl text-sm text-gray-600">
                         <p class="font-semibold">
-                            Store these recovery codes in a secure password manager. They can be used to recover access to your account if your two factor authentication device is lost.
+                            Store these recovery codes in a secure password manager. They can be used to recover access
+                            to your account if your two factor authentication device is lost.
                         </p>
                     </div>
 

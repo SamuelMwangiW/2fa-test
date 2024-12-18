@@ -35,7 +35,7 @@ class SendOTP extends Notification implements ShouldQueue
     public function toMail(User $notifiable)
     {
         return (new MailMessage)
-            ->line('Your security code is ' . $this->getTwoFactorCode($notifiable))
+            ->line('Your security code is '.$this->getTwoFactorCode($notifiable))
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }
@@ -54,7 +54,7 @@ class SendOTP extends Notification implements ShouldQueue
      */
     public function getTwoFactorCode(User $notifiable): ?string
     {
-        if (!$notifiable->two_factor_secret) {
+        if (! $notifiable->two_factor_secret) {
             return null;
         }
 
