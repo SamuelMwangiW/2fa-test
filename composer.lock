@@ -4057,16 +4057,16 @@
         },
         {
             "name": "samuelmwangiw/africastalking-laravel",
-            "version": "v1.7.2",
+            "version": "v1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SamuelMwangiW/africastalking-laravel.git",
-                "reference": "a1a743690ccf67ce5b150079a899b7b8d58a8235"
+                "reference": "0b88957646cbf6ab090e29765d18ca7aff514094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SamuelMwangiW/africastalking-laravel/zipball/a1a743690ccf67ce5b150079a899b7b8d58a8235",
-                "reference": "a1a743690ccf67ce5b150079a899b7b8d58a8235",
+                "url": "https://api.github.com/repos/SamuelMwangiW/africastalking-laravel/zipball/0b88957646cbf6ab090e29765d18ca7aff514094",
+                "reference": "0b88957646cbf6ab090e29765d18ca7aff514094",
                 "shasum": ""
             },
             "require": {
@@ -4125,7 +4125,7 @@
             ],
             "support": {
                 "issues": "https://github.com/SamuelMwangiW/africastalking-laravel/issues",
-                "source": "https://github.com/SamuelMwangiW/africastalking-laravel/tree/v1.7.2"
+                "source": "https://github.com/SamuelMwangiW/africastalking-laravel/tree/v1.7.3"
             },
             "funding": [
                 {
@@ -4133,7 +4133,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-15T08:50:54+00:00"
+            "time": "2024-12-19T10:37:25+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
